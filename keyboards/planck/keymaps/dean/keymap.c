@@ -175,23 +175,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   
  /* Gaming Layer - 
  *    Really only works with shooter games where you use 1 - 5 and using a mic.
- *    Should work with mmos as well forcing rebinding of the cast bars to Shift + # past 5.
- *    Alt is a great modifier as well for casting.
+ *    Should work with mmos as well forcing rebinding of the cast bars to Shift/Ctrl/Alt + #.
  * ,-----------------------------------------------------------------------------------.
- * | Tab  |   1  |   2  |   3  |   4  |   5  |   Y  |   U  |   I  |   O  |   P  | Esc  |
+ * | Tab  |   1  |   2  |   3  |   4  |   5  |   T  |   U  |   I  |   O  |   P  | Esc  |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Alt  |   Q  |   W  |   E  |   R  |   G  |   H  |   J  |   K  |   L  |   ;  |  "   |
+ * | Alt  |   Q  |   W  |   E  |   R  |   G  |   Y  |   J  |   K  |   L  |   ;  |  "   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Shift|   A  |   S  |   D  |   F  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
+ * | Shift|   A  |   S  |   D  |   F  |   B  |   H  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Ctrl |   Z  |   X  |   C  |   V  |Space |Lower |Raise | Left | Down |  Up  |Right |
+ * | Ctrl |   Z  |   X  |   C  |   V  |Space |   N  |      |      |Lower |Raise |Qwerty|
  * `-----------------------------------------------------------------------------------'
  */
 [_GAMING] = {
-  {KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
-  {KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
-  {KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
-  {BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
+  {KC_TAB,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_T,    KC_U,    KC_I,    KC_O,    KC_P,    KC_ESC},
+  {KC_LALT, KC_Q,    KC_W,    KC_E,    KC_R,    KC_G,    KC_Y,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
+  {KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,    KC_B,    KC_H,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
+  {KC_CTRL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_SPC,  KC_N,    _______, _______, LOWER,   RAISE,   QWERTY}
 }
 
 
