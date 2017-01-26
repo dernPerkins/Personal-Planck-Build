@@ -190,7 +190,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {KC_TAB,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_T,    KC_U,    KC_I,    KC_O,    KC_P,    KC_ESC},
   {KC_LALT, KC_Q,    KC_W,    KC_E,    KC_R,    KC_G,    KC_Y,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
   {KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,    KC_B,    KC_H,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
-  {KC_CTRL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_SPC,  KC_N,    _______, _______, LOWER,   RAISE,   QWERTY}
+  {KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_SPC,  KC_N,    KC_TRNS, KC_TRNS, LOWER,   RAISE,   QWERTY}
 }
 
 
