@@ -97,6 +97,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {KC_LSFT, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_ENT },
   {BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT}
 },
+  
+ /* Gaming Layer - 
+ *    Really only works with shooter games where you use 1 - 5 and using a mic.
+ *    Should work with mmos as well forcing rebinding of the cast bars to Shift/Ctrl/Alt + #.
+ * ,-----------------------------------------------------------------------------------.
+ * | Tab  |   1  |   2  |   3  |   4  |   5  |   T  |   U  |   I  |   O  |   P  | Esc  |
+ * |------+------+------+------+------+-------------+------+------+------+------+------|
+ * | Alt  |   Q  |   W  |   E  |   R  |   G  |   Y  |   J  |   K  |   L  |   ;  |  "   |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * | Shift|   A  |   S  |   D  |   F  |   B  |   H  |   M  |   ,  |   .  |   /  |Enter |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Ctrl |   Z  |   X  |   C  |   V  |Space |   N  |      |      |      |      |Qwerty|
+ * `-----------------------------------------------------------------------------------'
+ */
+[_GAMING] = {
+  {KC_TAB,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_T,    KC_U,    KC_I,    KC_O,    KC_P,    KC_ESC},
+  {KC_LALT, KC_Q,    KC_W,    KC_E,    KC_R,    KC_G,    KC_Y,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
+  {KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,    KC_B,    KC_H,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
+  {KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_SPC,  KC_N,    _______, _______, _______, _______, QWERTY}
+},
 
  /* The lower and raise layer have had the arrow keys changed to now be more navigational and helpful for coding.
  * Instead of the original intent on having them be for media keys I don't use.
@@ -171,26 +191,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {_______, _______, _______, AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  COLEMAK, DVORAK,  PLOVER,  GAMING},
   {_______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
-},
-  
- /* Gaming Layer - 
- *    Really only works with shooter games where you use 1 - 5 and using a mic.
- *    Should work with mmos as well forcing rebinding of the cast bars to Shift/Ctrl/Alt + #.
- * ,-----------------------------------------------------------------------------------.
- * | Tab  |   1  |   2  |   3  |   4  |   5  |   T  |   U  |   I  |   O  |   P  | Esc  |
- * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | Alt  |   Q  |   W  |   E  |   R  |   G  |   Y  |   J  |   K  |   L  |   ;  |  "   |
- * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Shift|   A  |   S  |   D  |   F  |   B  |   H  |   M  |   ,  |   .  |   /  |Enter |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Ctrl |   Z  |   X  |   C  |   V  |Space |   N  |      |      |Lower |Raise |Qwerty|
- * `-----------------------------------------------------------------------------------'
- */
-[_GAMING] = {
-  {KC_TAB,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_T,    KC_U,    KC_I,    KC_O,    KC_P,    KC_ESC},
-  {KC_LALT, KC_Q,    KC_W,    KC_E,    KC_R,    KC_G,    KC_Y,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
-  {KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,    KC_B,    KC_H,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT },
-  {KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_SPC,  KC_N,    KC_TRNS, KC_TRNS, LOWER,   RAISE,   QWERTY}
 }
 
 
@@ -244,6 +244,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+    case GAMING:
+      if (record->event.pressed) {
+        #ifdef AUDIO_ENABLE
+          PLAY_NOTE_ARRAY(music_scale, false, 0);
+        #endif
+        persistant_default_layer_set(1UL<<_GAMING);
+      }
+      return false;
+      break;
     case LOWER:
       if (record->event.pressed) {
         layer_on(_LOWER);
@@ -291,15 +300,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         keymap_config.raw = eeconfig_read_keymap();
         keymap_config.nkro = 1;
         eeconfig_update_keymap(keymap_config.raw);
-      }
-      return false;
-      break;
-    case GAMING:
-      if (record->event.pressed) {
-        #ifdef AUDIO_ENABLE
-          PLAY_NOTE_ARRAY(music_scale, false, 0);
-        #endif
-        persistant_default_layer_set(1UL<<_GAMING);
       }
       return false;
       break;
