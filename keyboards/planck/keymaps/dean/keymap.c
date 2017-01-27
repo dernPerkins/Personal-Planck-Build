@@ -249,7 +249,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         #ifdef AUDIO_ENABLE
           PLAY_NOTE_ARRAY(music_scale, false, 0);
         #endif
-        persistant_default_layer_set(1UL<<_GAMING);
+        default_layer_set(1UL<<_GAMING);
       }
       return false;
       break;
